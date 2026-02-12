@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¿Quieres ser mi San Valentín?</title>
+<title>¿Puedo ser tu San Valentín?</title>
 
 <style>
     body {
@@ -70,47 +70,59 @@
 
 <body>
 
-<img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Valentine GIF">
+<img src="https://media.tenor.com/kutFNFXxSIsAAAAM/minion-minion-loves.gif">
 
-<h1>¿Quieres ser mi San Valentín? 💌</h1>
+<h1>¿Puedo ser tu San Valentín? 💌</h1>
 
 <div class="buttons">
-    <button id="yesBtn">Sí 💖</button>
-    <button id="noBtn">No 💔</button>
+    <button id="yesBtn">Sí</button>
+    <button id="noBtn">No</button>
 </div>
 
-<div id="message">Sabía que dirías que sí 😍💘</div>
+<div id="message">Muejejeje</div>
 
 <script>
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
     const message = document.getElementById("message");
 
-    let scale = 1;
+    let yesScale = 1;
+    let noScale = 1;
     let noClicks = 0;
+    const maxClicks = 10;
 
     noBtn.addEventListener("click", () => {
         noClicks++;
-        scale += 0.3;
-        yesBtn.style.transform = `scale(${scale})`;
 
-        // Mueve el botón NO a posición aleatoria
+        // El botón SÍ crece
+        yesScale += 0.25;
+        yesBtn.style.transform = `scale(${yesScale})`;
+
+        // El botón NO se encoge
+        noScale -= 0.08;
+        if (noScale > 0) {
+            noBtn.style.transform = `scale(${noScale})`;
+        }
+
+        // Mover el botón NO aleatoriamente
         const x = Math.random() * (window.innerWidth - 100);
         const y = Math.random() * (window.innerHeight - 50);
         noBtn.style.left = x + "px";
         noBtn.style.top = y + "px";
 
-        // Después de 5 intentos, desaparece el NO
-        if (noClicks >= 5) {
-            noBtn.classList.add("hidden");
+        // Después de 10 clics desaparece
+        if (noClicks >= maxClicks) {
+            noBtn.style.display = "none";
         }
     });
 
     yesBtn.addEventListener("click", () => {
-        document.querySelector(".buttons").classList.add("hidden");
+        document.querySelector(".buttons").style.display = "none";
         message.style.display = "block";
     });
 </script>
 
+
 </body>
 </html>
+
